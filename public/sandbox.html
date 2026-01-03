@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Portal Sandbox | Auto-Fill Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .instructions {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+        }
+
+        .instructions h3 {
+            color: #818cf8;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructions ol {
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #f472b6;
+            font-family: monospace;
+        }
+
+        /* Essential for functionality - matching the bookmarklet expectations */
+        .paxDetails {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .paxDetails:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .gender-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .gender-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .gender-option input[type="radio"] {
+            accent-color: var(--primary);
+            width: 1.2rem;
+            height: 1.2rem;
+            cursor: pointer;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.25rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #10b981;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .success-fill {
+            animation: pulse 1s ease-in-out;
+            border-color: #10b981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Portal Sandbox</h1>
+            <p class="subtitle">Secure Testing Environment for Passport Scout</p>
+        </header>
+
+        <div class="instructions">
+            <h3>💡 Quick Start</h3>
+            <ol>
+                <li>Click <b>'Copy Test Data'</b> below to get dummy passport JSON.</li>
+                <li>Launch your <b>Auto-Fill Bookmarklet</b> from the bookmarks bar.</li>
+                <li>Paste the JSON and watch the fields animate as they populate.</li>
+            </ol>
+        </div>
+
+        <div id="booking-form">
+            <!-- Traveller 1 -->
+            <div class="paxDetails" id="traveller-1">
+                <div class="section-title">
+                    <span>Passenger 1 (Adult)</span>
+                    <span class="badge">Primary</span>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>First & Middle Name</label>
+                        <input type="text" placeholder="First & Middle Name" name="ADULT.0.rowFields.FIRST_NAME">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last Name" name="ADULT.0.rowFields.LAST_NAME">
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="gender-options">
+                            <label class="gender-option">
+                                <input type="radio" name="ADULT.0.GENDER" value="MALE">
+                                <span>Male</span>
+                            </label>
+                            <label class="gender-option">
+                                <input type="radio" name="ADULT.0.GENDER" value="FEMALE">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" placeholder="Nationality" name="ADULT.0.rowFields.NATIONALITY">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="text" placeholder="DD/MM/YYYY" placeholder="Date of birth" class="day-picker-display">
+                </div>
+            </div>
+
+            <!-- Traveller 2 -->
+            <div class="paxDetails" id="traveller-2">
+                <div class="section-title">
+                    <span>Passenger 2 (Adult)</span>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>First & Middle Name</label>
+                        <input type="text" placeholder="First & Middle Name" name="ADULT.1.rowFields.FIRST_NAME">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last Name" name="ADULT.1.rowFields.LAST_NAME">
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="gender-options">
+                            <label class="gender-option">
+                                <input type="radio" name="ADULT.1.GENDER" value="MALE">
+                                <span>Male</span>
+                            </label>
+                            <label class="gender-option">
+                                <input type="radio" name="ADULT.1.GENDER" value="FEMALE">
+                                <span>Female</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" placeholder="Nationality" name="ADULT.1.rowFields.NATIONALITY">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="text" placeholder="DD/MM/YYYY" placeholder="Date of birth" class="day-picker-display">
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary" onclick="copyTestData()">📋 Copy Test Data (JSON)</button>
+            <button class="btn-outline" onclick="window.close()">Close Window</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✅ JSON copied to clipboard!</div>
+
+    <script>
+        function copyTestData() {
+            const data = {
+                "tripName": "Honeymoon in Paris",
+                "travellers": [
+                    {
+                        "surname": "DOE",
+                        "names": "JOHN",
+                        "sex": "M",
+                        "passport_number": "A12345678",
+                        "nationality": "American",
+                        "dob": "15/05/1985"
+                    },
+                    {
+                        "surname": "SMITH",
+                        "names": "JANE",
+                        "sex": "F",
+                        "passport_number": "B87654321",
+                        "nationality": "British",
+                        "dob": "22/10/1990"
+                    }
+                ]
+            };
+
+            navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add visual feedback when fields are filled
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', function () {
+                if (this.value || this.checked) {
+                    const parent = this.closest('.paxDetails') || this.closest('.form-group');
+                    parent.classList.add('success-fill');
+                    setTimeout(() => parent.classList.remove('success-fill'), 1500);
+                }
+            });
+
+            // For radio buttons, we need to listen for clicks as well
+            if (input.type === 'radio') {
+                input.addEventListener('click', function () {
+                    const row = this.closest('.paxDetails');
+                    row.classList.add('success-fill');
+                    setTimeout(() => row.classList.remove('success-fill'), 1500);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

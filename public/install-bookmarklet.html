@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install MMT Auto-Fill Bookmarklet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+
+        .step h3 {
+            color: #333;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .step p {
+            color: #555;
+            line-height: 1.6;
+            margin-left: 38px;
+        }
+
+        .bookmarklet-link {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 2rem 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            cursor: move;
+        }
+
+        .bookmarklet-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .bookmarklet-link:active {
+            transform: translateY(0);
+        }
+
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .alert p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border: 2px dashed #2196f3;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .instruction-box h4 {
+            color: #1976d2;
+            margin-bottom: 0.75rem;
+        }
+
+        .instruction-box ol {
+            margin-left: 1.5rem;
+            color: #555;
+        }
+
+        .instruction-box li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        .browser-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .browser-icon {
+            text-align: center;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .browser-icon:hover {
+            opacity: 1;
+        }
+
+        .browser-icon img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+        }
+
+        .browser-icon span {
+            display: block;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .copy-button:hover {
+            background: #218838;
+        }
+
+        .copy-button.copied {
+            background: #17a2b8;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔖 Install MMT Auto-Fill</h1>
+        <p class="subtitle">One-click installation for your bookmarklet</p>
+
+        <div class="alert alert-success">
+            <strong>✨ Easy Installation!</strong>
+            <p>Simply drag the button below to your bookmarks bar, or follow the step-by-step instructions.</p>
+        </div>
+
+        <!-- The Bookmarklet Link -->
+        <a href="javascript:(function(){const jsonString=prompt(&quot;Paste your extracted Passport JSON data here:&quot;);if(!jsonString){alert(&quot;Operation cancelled. No data provided.&quot;);return}let data;try{const cleanedString=jsonString.replace(/```json|```/g,'').trim();data=JSON.parse(cleanedString)}catch(e){alert(&quot;Error: Invalid JSON format. Please paste the raw JSON output.&quot;);console.error(&quot;JSON Parsing Error:&quot;,e);return}function fillTravellerData(data,travellerIndex=0){let travellerForm=null;const travellerSections=document.querySelectorAll('div[data-testid^=&quot;traveller-detail-container&quot;]');if(travellerSections.length>0){travellerForm=travellerSections[travellerIndex]}if(!travellerForm){const adultContainers=document.querySelectorAll('.adult-details-container, .traveller-section');if(adultContainers.length>0){travellerForm=adultContainers[travellerIndex]}}if(!travellerForm){const allContainers=document.querySelectorAll('div[class*=&quot;traveller&quot;], div[class*=&quot;adult&quot;], section[class*=&quot;traveller&quot;]');for(let container of allContainers){const hasFirstName=container.querySelector('input[placeholder*=&quot;First&quot;], input[id*=&quot;firstName&quot;]');const hasLastName=container.querySelector('input[placeholder*=&quot;Last&quot;], input[id*=&quot;lastName&quot;]');if(hasFirstName&&hasLastName){const allForms=Array.from(allContainers).filter(c=>c.querySelector('input[placeholder*=&quot;First&quot;], input[id*=&quot;firstName&quot;]')&&c.querySelector('input[placeholder*=&quot;Last&quot;], input[id*=&quot;lastName&quot;]'));travellerForm=allForms[travellerIndex];break}}}if(!travellerForm){console.error(&quot;Traveller form section not found for index:&quot;,travellerIndex);console.log(&quot;Available elements:&quot;,document.querySelectorAll('div[data-testid], div[class*=&quot;traveller&quot;], div[class*=&quot;adult&quot;]'));alert(`Traveller form for ADULT ${travellerIndex+1} not found.\n\nTip: Make sure you're on the traveller details page.`);return false}console.log(`Found traveller form ${travellerIndex+1}:`,travellerForm);let firstNameInput=travellerForm.querySelector('input[placeholder=&quot;First & Middle Name&quot;]')||travellerForm.querySelector('input[placeholder*=&quot;First&quot;]')||travellerForm.querySelector('input[id*=&quot;firstName&quot;]')||travellerForm.querySelector('#firstName'+(travellerIndex+1));if(firstNameInput&&data.names){firstNameInput.value=data.names;firstNameInput.dispatchEvent(new Event('input',{bubbles:true}));firstNameInput.dispatchEvent(new Event('change',{bubbles:true}));firstNameInput.dispatchEvent(new Event('blur',{bubbles:true}));console.log(&quot;Filled first name:&quot;,data.names)}let lastNameInput=travellerForm.querySelector('input[placeholder=&quot;Last Name&quot;]')||travellerForm.querySelector('input[placeholder*=&quot;Last&quot;]')||travellerForm.querySelector('input[id*=&quot;lastName&quot;]')||travellerForm.querySelector('#lastName'+(travellerIndex+1));if(lastNameInput&&data.surname){lastNameInput.value=data.surname;lastNameInput.dispatchEvent(new Event('input',{bubbles:true}));lastNameInput.dispatchEvent(new Event('change',{bubbles:true}));lastNameInput.dispatchEvent(new Event('blur',{bubbles:true}));console.log(&quot;Filled last name:&quot;,data.surname)}if(data.sex){const genderToSelect=data.sex.toUpperCase().startsWith('F')?'FEMALE':'MALE';let genderButton=travellerForm.querySelector(`button[title=&quot;${genderToSelect}&quot;]`)||travellerForm.querySelector(`button[value=&quot;${genderToSelect}&quot;]`)||travellerForm.querySelector(`input[value=&quot;${genderToSelect}&quot;]`);if(genderButton){genderButton.click();console.log(&quot;Selected gender:&quot;,genderToSelect)}}const fillAnother=confirm(`✅ Successfully filled ADULT ${travellerIndex+1}!\n\nDo you want to fill the next adult?`);if(fillAnother){fillTravellerData(data,travellerIndex+1)}else{alert(&quot;🎉 Auto-fill complete!&quot;)}return true}const isTestPage=window.location.href.includes(&quot;test-bookmarklet.html&quot;)||window.location.href.includes(&quot;localhost&quot;);const isMakeMyTrip=window.location.href.includes(&quot;makemytrip.com/funnel/flights/review&quot;);if(isMakeMyTrip||isTestPage){console.log(&quot;Starting auto-fill with data:&quot;,data);fillTravellerData(data,0)}else{alert(&quot;⚠️ Please navigate to the MakeMyTrip flight review page before running this tool.\n\nCurrent page: &quot;+window.location.href)}})();"
+            class="bookmarklet-link" id="bookmarkletLink" title="Drag this to your bookmarks bar!">
+            🔖 MMT AI Autofill
+        </a>
+
+        <div class="instruction-box">
+            <h4>📋 Installation Methods:</h4>
+            <ol>
+                <li><strong>Drag & Drop (Easiest):</strong>
+                    <ul>
+                        <li>Press <code>Ctrl + Shift + B</code> to show your bookmarks bar</li>
+                        <li>Drag the purple button above to your bookmarks bar</li>
+                        <li>Done! ✅</li>
+                    </ul>
+                </li>
+                <li><strong>Right-Click Method:</strong>
+                    <ul>
+                        <li>Right-click the purple button above</li>
+                        <li>Select "Add to Bookmarks" or "Bookmark This Link"</li>
+                        <li>Save it to your bookmarks bar</li>
+                    </ul>
+                </li>
+                <li><strong>Manual Copy (if drag doesn't work):</strong>
+                    <ul>
+                        <li>Click the "Copy Bookmarklet Code" button below</li>
+                        <li>Right-click your bookmarks bar → "Add new bookmark"</li>
+                        <li>Name: <code>MMT AI Autofill</code></li>
+                        <li>URL: Paste the copied code</li>
+                        <li>Save</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <button class="copy-button" id="copyButton" onclick="copyBookmarkletCode()">
+            📋 Copy Bookmarklet Code (Manual Method)
+        </button>
+
+        <div class="step">
+            <span class="step-number">1</span>
+            <h3>Show Your Bookmarks Bar</h3>
+            <p>Press <code>Ctrl + Shift + B</code> (Windows) or <code>Cmd + Shift + B</code> (Mac) to display your
+                bookmarks bar if it's hidden.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">2</span>
+            <h3>Drag the Button</h3>
+            <p>Click and hold the purple "MMT AI Autofill" button above, then drag it to your bookmarks bar and release.
+            </p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">3</span>
+            <h3>Test It!</h3>
+            <p>Go to <a href="test-bookmarklet.html" target="_blank">the test page</a>, click your new bookmark, and
+                paste sample JSON to see it work!</p>
+        </div>
+
+        <div class="alert">
+            <strong>💡 Pro Tip:</strong>
+            <p>After installation, you can rename the bookmark by right-clicking it and selecting "Edit". You can also
+                move it anywhere on your bookmarks bar!</p>
+        </div>
+
+        <footer>
+            <p>Works with Chrome, Edge, Firefox, Safari, and Opera</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">Part of Passport Scout Elite</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyBookmarkletCode() {
+            const bookmarkletLink = document.getElementById('bookmarkletLink');
+            const bookmarkletCode = bookmarkletLink.getAttribute('href');
+
+            navigator.clipboard.writeText(bookmarkletCode).then(() => {
+                const button = document.getElementById('copyButton');
+                button.textContent = '✅ Copied! Now create a bookmark manually';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.textContent = '📋 Copy Bookmarklet Code (Manual Method)';
+                    button.classList.remove('copied');
+                }, 3000);
+            }).catch(err => {
+                alert('Failed to copy. Please try the drag & drop method instead.');
+                console.error('Copy failed:', err);
+            });
+        }
+
+        // Prevent the bookmarklet from running when clicked on this page
+        document.getElementById('bookmarkletLink').addEventListener('click', function (e) {
+            if (window.location.href.includes('install-bookmarklet.html')) {
+                e.preventDefault();
+                alert('👆 Drag this button to your bookmarks bar!\n\nOr right-click it and select "Add to Bookmarks".\n\nDon\'t click it here - it only works when saved as a bookmark.');
+            }
+        });
+
+        // Show helpful message on page load
+        window.addEventListener('load', function () {
+            console.log('%c🔖 MMT Auto-Fill Bookmarklet Installer', 'font-size: 20px; font-weight: bold; color: #667eea;');
+            console.log('%cDrag the purple button to your bookmarks bar to install!', 'font-size: 14px; color: #666;');
+        });
+    </script>
+</body>
+
+</html>

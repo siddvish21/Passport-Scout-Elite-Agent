@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MakeMyTrip Auto-Fill Test Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .alert {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .alert h3 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .alert p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .traveller-section {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .traveller-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .gender-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button[title] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button[title]:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        button[title].selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Bookmarklet Test Page</h1>
+        <p class="subtitle">Test your MakeMyTrip Auto-Fill bookmarklet here</p>
+
+        <div class="alert">
+            <h3>📋 How to Test</h3>
+            <p>
+                1. Make sure you've created the bookmarklet in your browser<br>
+                2. Click the bookmarklet in your bookmarks bar<br>
+                3. Paste this sample JSON when prompted:<br>
+                <code>{"surname":"SMITH","names":"JOHN ALLAN","sex":"M"}</code><br>
+                4. Watch the fields auto-fill below!
+            </p>
+        </div>
+
+        <!-- Traveller 1 -->
+        <div class="traveller-section" data-testid="traveller-detail-container-0">
+            <div class="traveller-header">
+                <span>ADULT 1</span>
+                <span class="badge">Primary</span>
+            </div>
+
+            <div class="form-group">
+                <label>First & Middle Name</label>
+                <input type="text" placeholder="First & Middle Name" id="firstName1">
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Last Name" id="lastName1">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-group">
+                    <button type="button" title="MALE" onclick="selectGender(this, 1)">MALE</button>
+                    <button type="button" title="FEMALE" onclick="selectGender(this, 1)">FEMALE</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traveller 2 -->
+        <div class="traveller-section" data-testid="traveller-detail-container-1">
+            <div class="traveller-header">
+                <span>ADULT 2</span>
+            </div>
+
+            <div class="form-group">
+                <label>First & Middle Name</label>
+                <input type="text" placeholder="First & Middle Name" id="firstName2">
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" placeholder="Last Name" id="lastName2">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-group">
+                    <button type="button" title="MALE" onclick="selectGender(this, 2)">MALE</button>
+                    <button type="button" title="FEMALE" onclick="selectGender(this, 2)">FEMALE</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="test-button" onclick="showTestData()">
+            📋 Show Sample JSON for Testing
+        </button>
+
+        <div class="success-message" id="successMessage">
+            <strong>✅ Sample JSON Copied!</strong><br>
+            Now click your bookmarklet and paste the data.
+        </div>
+    </div>
+
+    <script>
+        function selectGender(button, traveller) {
+            // Remove selected class from siblings
+            const siblings = button.parentElement.querySelectorAll('button');
+            siblings.forEach(btn => btn.classList.remove('selected'));
+
+            // Add selected class to clicked button
+            button.classList.add('selected');
+        }
+
+        function showTestData() {
+            const sampleData = {
+                "surname": "SMITH",
+                "names": "JOHN ALLAN",
+                "passport_number": "P1234567",
+                "nationality": "USA",
+                "dob": "1990-01-15",
+                "expiry": "2030-01-15",
+                "sex": "M",
+                "issuing_country": "USA"
+            };
+
+            const jsonString = JSON.stringify(sampleData, null, 2);
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(jsonString).then(() => {
+                const message = document.getElementById('successMessage');
+                message.classList.add('show');
+
+                setTimeout(() => {
+                    message.classList.remove('show');
+                }, 3000);
+            });
+
+            console.log('Sample JSON:', jsonString);
+            alert('Sample JSON copied to clipboard!\n\nNow:\n1. Click your bookmarklet\n2. Paste the JSON (Ctrl+V)\n3. Click OK');
+        }
+
+        // Simulate MakeMyTrip URL for testing
+        console.log('Test page loaded. This simulates: makemytrip.com/funnel/flights/review');
+
+        // Add event listeners to inputs to show they're being filled
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function () {
+                this.style.borderColor = '#4caf50';
+                this.style.background = '#e8f5e9';
+
+                setTimeout(() => {
+                    this.style.borderColor = '#667eea';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>
