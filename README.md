@@ -87,8 +87,6 @@ Visit `http://localhost:5173` to start your session.
 
 ## 📸 Visual Walkthrough
 
-## 📸 Visual Walkthrough
-
 ### 1. Upload Documents
 <img src="./assets/Image-1.png" width="100%" alt="Dashboard Upload" />
 Begin by dragging and dropping your passport image into the upload zone. The app is ready to accept your documents for secure processing.
